@@ -25,6 +25,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/editor/cn/P215KthLargestElementInAnArray.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/editor/cn/doc/content/P215KthLargestElementInAnArray.md" />
+              <option name="frontendQuestionId" value="leetcode.cn215" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/editor/cn/P215KthLargestElementInAnArray.java" />
+              <option name="titleSlug" value="kth-largest-element-in-an-array" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/editor/cn/P622DesignCircularQueue.java">
           <value>
             <LeetcodeEditor>

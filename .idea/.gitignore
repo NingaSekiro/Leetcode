@@ -30,4 +30,6 @@
 *.rar
 .idea/
 target/
+doc/
+
 
