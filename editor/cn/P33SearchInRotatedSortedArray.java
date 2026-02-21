@@ -1,0 +1,104 @@
+//整数数组 nums 按升序排列，数组中的值 互不相同 。 
+//
+// 在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 向左旋转，使数组变为 [nums[k], 
+//nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1
+//,2,4,5,6,7] 下标 3 上向左旋转后可能变为 [4,5,6,7,0,1,2] 。 
+//
+// 给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。 
+//
+// 你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。 
+//
+// 
+//
+// 示例 1： 
+//
+// 
+//输入：nums = [4,5,6,7,0,1,2], target = 0
+//输出：4
+// 
+//
+// 示例 2： 
+//
+// 
+//输入：nums = [4,5,6,7,0,1,2], target = 3
+//输出：-1 
+//
+// 示例 3： 
+//
+// 
+//输入：nums = [1], target = 0
+//输出：-1
+// 
+//
+// 
+//
+// 提示： 
+//
+// 
+// 1 <= nums.length <= 5000 
+// -10⁴ <= nums[i] <= 10⁴ 
+// nums 中的每个值都 独一无二 
+// 题目数据保证 nums 在预先未知的某个下标上进行了旋转 
+// -10⁴ <= target <= 10⁴ 
+// 
+//
+// Related Topics 数组 二分查找 👍 3321 👎 0
+
+
+package leetcode.editor.cn;
+
+//Java：搜索旋转排序数组
+public class P33SearchInRotatedSortedArray {
+    public static void main(String[] args) {
+        Solution solution = new P33SearchInRotatedSortedArray().new Solution();
+        solution.search(new int[]{3, 1}, 3);
+        // TO TEST
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        int length;
+
+        public int search(int[] nums, int target) {
+            length = nums.length;
+            int leastIndex = findMinNum(nums);
+            int target1 = findTarget(nums, 0, leastIndex - 1, target);
+            int target2 = findTarget(nums, leastIndex, length - 1, target);
+            return target1 >= 0 ? target1 : target2;
+        }
+
+        int findMinNum(int[] nums) {
+            int l = -1;
+            int r = nums.length;
+            while (l + 1 != r) {
+                int mid = l + (r - l) / 2;
+                if (nums[mid] > nums[length - 1]) {
+                    l = mid;
+                } else {
+                    r = mid;
+                }
+            }
+            return r;
+        }
+
+        int findTarget(int[] nums, int start, int end, int target) {
+            int l = start - 1;
+            int r = end + 1;
+            while (l + 1 < r) {
+                int mid = l + (r - l) / 2;
+                if (nums[mid] < target) {
+                    l = mid;
+                } else {
+                    r = mid;
+                }
+            }
+            if (r >= 0 && r < length && nums[r] == target) {
+                return r;
+            }
+            return -1;
+        }
+    }
+//leetcode submit region end(Prohibit modification and deletion)
+
+}

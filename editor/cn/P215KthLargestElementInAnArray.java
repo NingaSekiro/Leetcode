@@ -38,20 +38,69 @@ import java.util.PriorityQueue;
 public class P215KthLargestElementInAnArray {
     public static void main(String[] args) {
         Solution solution = new P215KthLargestElementInAnArray().new Solution();
+        solution.findKthLargest(new int[]{7, 6, 5, 4, 3, 2, 1}, 2);
         // TO TEST
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        int length;
+
         public int findKthLargest(int[] nums, int k) {
-            PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-            for (int num : nums) {
-                priorityQueue.offer(num);
-                if (priorityQueue.size() > k) {
-                    priorityQueue.poll();
+            length = nums.length;
+//            return quickselect(nums, 0, nums.length - 1, nums.length - k);
+            buildMaxHeap(nums);
+            for (int i = nums.length - 1; i > nums.length - k; i--) {
+                swap(nums, 0, i);
+                length--;
+                maxHeap(nums, 0);
+            }
+            return nums[0];
+        }
+
+        void buildMaxHeap(int[] nums) {
+            for (int i = length / 2 - 1; i >= 0; i--) {
+                maxHeap(nums, i);
+            }
+        }
+
+        void maxHeap(int[] nums, int index) {
+            int l = index * 2 + 1;
+            int r = index * 2 + 2;
+            int largest = index;
+            if (l < length && nums[l] > nums[largest]) {
+                largest = l;
+            }
+            if (r < length && nums[r] > nums[largest]) {
+                largest = r;
+            }
+            if (largest != index) {
+                swap(nums, index, largest);
+                maxHeap(nums, largest);
+            }
+        }
+
+        public void swap(int[] a, int i, int j) {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+
+
+        int quickselect(int[] nums, int l, int r, int k) {
+            if (l == r) return nums[k];
+            int x = nums[l], i = l - 1, j = r + 1;
+            while (i < j) {
+                do i++; while (nums[i] < x);
+                do j--; while (nums[j] > x);
+                if (i < j) {
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
                 }
             }
-            return priorityQueue.peek();
+            if (k <= j) return quickselect(nums, l, j, k);
+            else return quickselect(nums, j + 1, r, k);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

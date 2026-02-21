@@ -68,45 +68,7 @@ public class P641DesignCircularDeque {
         private List<Integer> list;
         int length;
 
-        public MyCircularDeque(int k) {
-            list = new ArrayList<>(k);
-        }
 
-        public boolean insertFront(int value) {
-            list.addFirst(value);
-            return true;
-        }
-
-        public boolean insertLast(int value) {
-            list.add(value);
-            return true;
-        }
-
-        public boolean deleteFront() {
-            list.remove(0);
-            return true;
-        }
-
-        public boolean deleteLast() {
-            list.remove(list.size() - 1);
-            return true;
-        }
-
-        public int getFront() {
-            return list.get(0);
-        }
-
-        public int getRear() {
-            return list.getLast();
-        }
-
-        public boolean isEmpty() {
-            return list.isEmpty();
-        }
-
-        public boolean isFull() {
-            return list.size() <=length;
-        }
     }
 
 /**

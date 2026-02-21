@@ -19,4 +19,8 @@ public class ListNode {
         }
         return sb.toString();
     }
+
+    private String getD(){
+        return "";
+    }
 }

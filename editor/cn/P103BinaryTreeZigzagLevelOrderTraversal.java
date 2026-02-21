@@ -71,29 +71,6 @@ public class P103BinaryTreeZigzagLevelOrderTraversal {
             if (root == null) {
                 return res;
             }
-            boolean leftToRight = true;
-            Queue<TreeNode> queue = new LinkedList<>();
-            queue.add(root);
-            while (!queue.isEmpty()) {
-                List<Integer> integerList = new ArrayList<>();
-                int size = queue.size();
-                for (int i = 0; i < size; i++) {
-                    TreeNode node = queue.poll();
-                    if (leftToRight) {
-                        integerList.add(node.val);
-                    } else {
-                        integerList.addFirst(node.val);
-                    }
-                    if (node.left != null) {
-                        queue.add(node.left);
-                    }
-                    if (node.right != null) {
-                        queue.add(node.right);
-                    }
-                }
-                leftToRight = !leftToRight;
-                res.add(integerList);
-            }
             return res;
         }
     }

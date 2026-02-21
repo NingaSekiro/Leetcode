@@ -33,6 +33,8 @@
 
 package leetcode.editor.cn;
 
+import java.util.LinkedList;
+
 //Java：二叉树的最小深度
 public class P111MinimumDepthOfBinaryTree {
     public static void main(String[] args) {
@@ -57,27 +59,35 @@ public class P111MinimumDepthOfBinaryTree {
      * }
      */
     class Solution {
-        int minDepth = 1000000000;
 
         public int minDepth(TreeNode root) {
-            dfs(root, 1);
-            return minDepth;
-        }
-
-        private void dfs(TreeNode root, int depth) {
             if (root == null) {
-                minDepth = 0;
-                return;
+                return 0;
             }
-            if (root.left == null && root.right == null) {
-                minDepth = Math.min(minDepth, depth);
+            LinkedList<TreeNode> linkedList = new LinkedList<>();
+            linkedList.add(root);
+            int depth = 0;
+            while (!linkedList.isEmpty()) {
+                depth++;
+                int size = linkedList.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = linkedList.pollFirst();
+                    // 如果是叶子节点，直接返回当前深度
+                    if (node.left == null && node.right == null) {
+                        return depth;
+                    }
+
+                    // 将子节点加入队列
+                    if (node.left != null) {
+                        linkedList.offer(node.left);
+                    }
+                    if (node.right != null) {
+                        linkedList.offer(node.right);
+                    }
+                }
+
             }
-            if (root.left != null && depth + 1 < minDepth) {
-                dfs(root.left, depth + 1);
-            }
-            if (root.right != null && depth + 1 < minDepth) {
-                dfs(root.right, depth + 1);
-            }
+            return 0;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
